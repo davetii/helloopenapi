@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  description: Hello API Client
+  version: "1.0.0"
+  title: Hello API
+  contact:
+    email: davetii@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+servers:
+  - url: http://localhost:4010
+    description: remote Server
+
+paths:
+  /roles:
+    get:
+      summary: get roles
+      operationId: readRoles
+      responses:
+        '200':
+          description: Return Person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                 type: string
+              example: [friend, parent, sibling, spouse, child, relative]
+        '404':
+          description: Not Found

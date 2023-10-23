@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  mock-server:
+    image: stoplight/prism:latest
+    container_name: mock_roles_container
+    command: 'mock -h 0.0.0.0 /app/helloopenapi-client.yaml'
+    volumes:
+      - ../yml:/app
+    ports:
+      - "4010:4010"
