@@ -32,3 +32,110 @@ paths:
               schema:
                 type: string
                 example: hello
+
+  /v1/person:
+    get:
+      summary: get person
+      operationId: getAllPersons
+      responses:
+        '200':
+          description: Return Person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Person"
+        '404':
+          description: Not Found
+
+    post:
+      summary: Add Person
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Person Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '403':
+          description: Already exists
+        '404':
+          description: Not Found
+    put:
+      summary: Update Person
+      operationId: updatePerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: Person Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '403':
+          description: Already exists
+        '404':
+          description: Not Found
+
+  /v1/person/{name}:
+    parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: get person
+      operationId: readPerson
+      responses:
+        '200':
+          description: Return Person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        '404':
+          description: Not Found
+    delete:
+      summary: delete Person
+      operationId: deletePerson
+      responses:
+        '204':
+          description: Delete Person
+        '404':
+          description: Not Found
+
+    
+components:
+  parameters:
+    namePathParam:
+      in: path
+      description: Name Parameter
+      name: name
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Person:
+        type: object
+        description: A person
+        properties:
+          name:
+            type: string
+          role:
+            type: string
