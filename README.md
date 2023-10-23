@@ -3,8 +3,7 @@
 Examples of using OpenApi in Springboot
 
 ## Description
-
-This is the second sample which expands on hello world API using webmvc and includes basic model examples
+Collection of samples creating SpringBoot services from openapi generator
 
 ### Dependencies
 * Springboot 3 web mvc
@@ -18,7 +17,11 @@ This is the second sample which expands on hello world API using webmvc and incl
 * mvn spring-boot:run
 
 ### History
+* feature/feature/MvcClient_Example
+  * Added Client Example, using docker based mock server
+  * Not a great example of using a client, used the client api to validate appropriate roles on the update requests
 * feature/SpringBootMVC_SimpleModel_Example
+  * Added Example of CRUD methods for Simple Models
 * feature/HelloWorld_SringBootMvc
   * Basic openapi generated api
     * http://localhost:8080/api/v1/hello?name=bob
