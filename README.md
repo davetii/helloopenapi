@@ -22,7 +22,7 @@ Collection of samples creating SpringBoot services from openapi generator
 * implement persistence layer
 
 ### History
-* feature/feature/MvcClient_Example
+* feature/MvcClient_Example
   * Added Client Example, using docker based mock server
   * Not a great example of using a client, used the client api to validate appropriate roles on the update requests
 * feature/SpringBootMVC_SimpleModel_Example
