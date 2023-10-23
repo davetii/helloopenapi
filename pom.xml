@@ -42,6 +42,12 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.6</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.8</version>
+		</dependency>
 	   	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -51,6 +57,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -89,6 +96,31 @@
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
 								<useSpringBoot3>true</useSpringBoot3>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>generate-client-stub</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/yml/helloopenapi-client.yaml
+							</inputSpec>
+							<generatorName>java</generatorName>
+							<apiPackage>software.daveturner.helloopenapi.client.api</apiPackage>
+							<modelPackage>software.daveturner.helloopenapi.client.model</modelPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<library>resttemplate</library>
+								<annotationLibrary>none</annotationLibrary>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<useSpringBoot3>true</useSpringBoot3>
+								<requestMappingMode>none</requestMappingMode>
+								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 						</configuration>
 					</execution>

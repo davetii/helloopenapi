@@ -69,6 +69,8 @@ paths:
           description: Already exists
         '404':
           description: Not Found
+        '400':
+          description: Invalid request
     put:
       summary: Update Person
       operationId: updatePerson
