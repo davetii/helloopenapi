@@ -49,7 +49,7 @@ public class V1ApiDelegateImpl  implements V1ApiDelegate {
     }
 
     public ResponseEntity<Person> createUpdatePerson(Person person) {
-        List<String> allowedRoles = client.readRoles();
+        List<String> allowedRoles = readRoles();
         if(allowedRoles.contains(person.getRole())) {
             people.put(person.getName(), person);
             return ResponseEntity.ok(person);
@@ -70,5 +70,9 @@ public class V1ApiDelegateImpl  implements V1ApiDelegate {
         Person p = people.get(name);
         if (p == null) { return ResponseEntity.notFound().build(); }
         return ResponseEntity.ok(people.get(name));
+    }
+
+    public List<String> readRoles() {
+        return client.readRoles();
     }
 }
