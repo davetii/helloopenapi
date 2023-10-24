@@ -17,11 +17,12 @@ Collection of samples creating SpringBoot services from openapi generator
 * mvn spring-boot:run
 
 ### Todo
-* Create Cucumber tests
 * Convert project from mvc to reactive
 * implement persistence layer
 
 ### History
+* feature/integrationTests_MVC
+  * Adding Cucumber API testing
 * feature/MvcClient_Example
   * Added Client Example, using docker based mock server
   * Not a great example of using a client, used the client api to validate appropriate roles on the update requests
