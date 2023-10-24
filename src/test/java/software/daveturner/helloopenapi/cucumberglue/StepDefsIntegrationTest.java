@@ -12,9 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 
 @SpringBootTest
-
 public class StepDefsIntegrationTest {
-
 
    V1ApiDelegateImpl d = new MockV1ApiDelegateImpl();
     private String greetingValue = null;

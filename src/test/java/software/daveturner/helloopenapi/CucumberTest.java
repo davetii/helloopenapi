@@ -12,7 +12,4 @@ import org.springframework.boot.test.context.*;
         features = {"src/test/resources/features"},
         plugin = {"pretty"},
         glue = {"software.daveturner.helloopenapi.cucumberglue"})
-public class CucumberTest {
-
-
-}
+public class CucumberTest { }
