@@ -11,7 +11,7 @@ import java.util.*;
 @Service
 public class V1ApiDelegateImpl  implements V1ApiDelegate {
 
-    DefaultApi client;
+    private final DefaultApi client;
     private final Map<String, Person> people = new HashMap<>();
     public V1ApiDelegateImpl() {
         people.put("Diana", newPerson("Diana", "spouse"));

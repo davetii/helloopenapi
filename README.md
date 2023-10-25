@@ -21,6 +21,8 @@ Collection of samples creating SpringBoot services from openapi generator
 * implement persistence layer
 
 ### History
+ * feature/adding-wiremock-to-test
+   * Adding Wiremock to tests
 * feature/integrationTests_MVC
   * Adding Cucumber API testing
 * feature/MvcClient_Example
