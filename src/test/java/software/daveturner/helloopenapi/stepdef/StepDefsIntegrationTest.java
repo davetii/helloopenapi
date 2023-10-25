@@ -1,4 +1,4 @@
-package software.daveturner.helloopenapi.cucumberglue;
+package software.daveturner.helloopenapi.stepdef;
 
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.*;
@@ -6,15 +6,14 @@ import org.springframework.boot.test.context.*;
 import software.daveturner.helloopenapi.delegate.*;
 import software.daveturner.helloopenapi.model.*;
 
-import java.util.*;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
 @SpringBootTest
 public class StepDefsIntegrationTest {
 
-   V1ApiDelegateImpl d = new MockV1ApiDelegateImpl();
+
+   private final V1ApiDelegateImpl d = new V1ApiDelegateImpl();
     private String greetingValue = null;
     private int allPeopleSize = 0;
 
@@ -40,27 +39,16 @@ public class StepDefsIntegrationTest {
     }
 
     @When("newPerson is called with {string} and {string}")
-    public void callNewPlayer(String name, String role) throws Exception {
+    public void callNewPlayer(String name, String role) {
         Person p = new Person();
         p.setRole(role);
         p.setName(name);
         status = d.createPerson(p).getStatusCode().value();
-        System.out.println("status: " + status );
     }
 
     @Then("api returns status {string}")
     public void ensureGetNewPersonReturnsExpected(String expected) {
         Assertions.assertEquals(status, Integer.parseInt(expected));
-    }
-
-    class MockV1ApiDelegateImpl extends V1ApiDelegateImpl {
-
-
-        public List<String> readRoles() {
-            String [] s = {"sibling", "spouse", "parent", "child", "friend"};
-            return Arrays.asList(s);
-        }
-
     }
 
 
