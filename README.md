@@ -28,7 +28,7 @@ Collection of samples creating SpringBoot services from openapi generator
 
 ### History
 * feature/adding-docker
-  * Adding docker-compose support
+  * Adding docker-compose support in maven pom
  * feature/adding-wiremock-to-test
    * Adding Wiremock to tests
 * feature/integrationTests_MVC
