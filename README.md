@@ -7,9 +7,10 @@ Collection of samples creating SpringBoot services from openapi generator
 
 ### Dependencies
 * jdk17
-* Springboot 3 web mvc
-* openapi libraries
-* Cucumber libraries
+* Springboot 3 web mvc (via pom)
+* openapi (via pom)
+* Cucumber (via pom)
+* Wiremock (via pom)
 * Docker installed on system
 * docker-compose available on command line
 
