@@ -24,7 +24,6 @@ Collection of samples creating SpringBoot services from openapi generator
 
 ### Todo
 * Convert project from mvc to reactive
-* implement persistence layer
 
 ### History
 * feature/adding-docker
