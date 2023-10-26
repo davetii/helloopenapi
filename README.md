@@ -6,9 +6,10 @@ Examples of using OpenApi in Springboot
 Collection of samples creating SpringBoot services from openapi generator
 
 ### Dependencies
+* jdk17
 * Springboot 3 web mvc
 * openapi libraries
-* jdk17
+* Cucumber libraries
 * Docker installed on system
 * docker-compose available on command line
 
