@@ -9,6 +9,8 @@ Collection of samples creating SpringBoot services from openapi generator
 * Springboot 3 web mvc
 * openapi libraries
 * jdk17
+* Docker installed on system
+* docker-compose available on command line
 
 ### Installing
 * mvn install
@@ -21,6 +23,8 @@ Collection of samples creating SpringBoot services from openapi generator
 * implement persistence layer
 
 ### History
+* feature/adding-docker
+  * Adding docker-compose support
  * feature/adding-wiremock-to-test
    * Adding Wiremock to tests
 * feature/integrationTests_MVC
