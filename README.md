@@ -12,7 +12,7 @@ Collection of samples creating SpringBoot services from openapi generator
 
 ### Whats in the POM
 (Examples of usage)
-* Springboot 3 web react and mvc (see older feature branches)
+* Springboot 3 reactive and mvc version (see older feature branches for mvc)
 * openapi
 * Cucumber
 * Wiremock
@@ -24,7 +24,8 @@ Collection of samples creating SpringBoot services from openapi generator
 * mvn spring-boot:run
 
 ### Todo
-* use readroles calls in async way  
+* use readroles calls in async way
+
 
 ### History
 * feature/reactive
