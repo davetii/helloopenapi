@@ -10,8 +10,9 @@ Collection of samples creating SpringBoot services from openapi generator
 * Docker installed on system
 * docker-compose available on command line
 
-### Whats in the POM (Samples)
-* Springboot 3 web mvc
+### Whats in the POM
+(Examples of usage)
+* Springboot 3 reactive and mvc version (see older feature branches for mvc)
 * openapi
 * Cucumber
 * Wiremock
@@ -23,9 +24,12 @@ Collection of samples creating SpringBoot services from openapi generator
 * mvn spring-boot:run
 
 ### Todo
-* Convert project from mvc to reactive
+* use readroles calls in async way
+
 
 ### History
+* feature/reactive
+  * Converted api to spring-boot-reactive
 * feature/adding-docker
   * Adding docker-compose support in maven pom
  * feature/adding-wiremock-to-test
