@@ -23,6 +23,9 @@ Collection of samples creating SpringBoot services from openapi generator
 ### Executing program
 * mvn spring-boot:run
 
+### Todo
+* use readroles calls in async way  
+
 ### History
 * feature/reactive
   * Converted api to spring-boot-reactive

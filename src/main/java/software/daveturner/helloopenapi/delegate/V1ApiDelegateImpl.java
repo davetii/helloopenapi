@@ -35,7 +35,7 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
 
     @Override
     public Mono<ResponseEntity<String>> sayHello(String name, ServerWebExchange exchange) {
-        return Mono.just(new ResponseEntity<>("hello " + name, HttpStatus.OK));
+        return Mono.just(new ResponseEntity<>("Hello " + name, HttpStatus.OK));
     }
 
     @Override
