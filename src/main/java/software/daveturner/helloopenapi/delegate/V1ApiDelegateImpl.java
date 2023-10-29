@@ -1,10 +1,7 @@
 package software.daveturner.helloopenapi.delegate;
 
-
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
-import org.springframework.web.server.*;
-import reactor.core.publisher.*;
 import software.daveturner.helloopenapi.api.*;
 import software.daveturner.helloopenapi.client.api.*;
 import software.daveturner.helloopenapi.model.*;
@@ -12,12 +9,10 @@ import software.daveturner.helloopenapi.model.*;
 import java.util.*;
 
 @Service
-public class V1ApiDelegateImpl implements V1ApiDelegate {
-
-    private final Map<String, Person> people = new HashMap<>();
+public class V1ApiDelegateImpl  implements V1ApiDelegate {
 
     private final DefaultApi client;
-
+    private final Map<String, Person> people = new HashMap<>();
     public V1ApiDelegateImpl() {
         people.put("Diana", newPerson("Diana", "spouse"));
         people.put("Mary", newPerson("Mary", "child"));
@@ -34,48 +29,50 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
     }
 
     @Override
-    public Mono<ResponseEntity<String>> sayHello(String name, ServerWebExchange exchange) {
-        return Mono.just(new ResponseEntity<>("Hello " + name, HttpStatus.OK));
+    public ResponseEntity<String> sayHello(String name) {
+        return new ResponseEntity<>("Hello " + name, HttpStatus.OK);
     }
 
     @Override
-    public Mono<ResponseEntity<Flux<Person>>> getAllPersons(ServerWebExchange exchange) {
-        return Mono.just(ResponseEntity.ok(Flux.fromIterable(people.values())));
+    public ResponseEntity<List<Person>> getAllPersons() {
+        return ResponseEntity.ok(new ArrayList<>(people.values()));
     }
 
     @Override
-    public Mono<ResponseEntity<Person>> readPerson(String name, ServerWebExchange exchange) {
-        Person p = people.get(name);
-        if (p == null) { return Mono.just(ResponseEntity.notFound().build()); }
-        return Mono.just(ResponseEntity.ok(p));
+    public ResponseEntity<Person> createPerson(Person person) {
+        return createUpdatePerson(person);
     }
 
     @Override
-    public Mono<ResponseEntity<Void>> deletePerson(String name, ServerWebExchange exchange) {
+    public ResponseEntity<Person> updatePerson(Person person) {
+        return createUpdatePerson(person);
+    }
+
+    public ResponseEntity<Person> createUpdatePerson(Person person) {
+        List<String> allowedRoles = readRoles();
+        if(allowedRoles.contains(person.getRole())) {
+            people.put(person.getName(), person);
+            return ResponseEntity.ok(person);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deletePerson(String name) {
         int initKeys = people.keySet().size();
         people.remove(name);
-        if(initKeys == people.keySet().size()) { return Mono.just(ResponseEntity.notFound().build()); }
-        return Mono.just(ResponseEntity.noContent().build());
+        if(initKeys == people.keySet().size()) { return ResponseEntity.notFound().build(); }
+        return ResponseEntity.noContent().build();
     }
 
     @Override
-    public Mono<ResponseEntity<Person>> createPerson(Mono<Person> person, ServerWebExchange exchange) {
-        return createUpdatePerson(person);
+    public ResponseEntity<Person> readPerson(String name) {
+        Person p = people.get(name);
+        if (p == null) { return ResponseEntity.notFound().build(); }
+        return ResponseEntity.ok(people.get(name));
     }
 
-    @Override
-    public Mono<ResponseEntity<Person>> updatePerson(Mono<Person> person, ServerWebExchange exchange) {
-        return createUpdatePerson(person);
-    }
-
-    public Mono<ResponseEntity<Person>> createUpdatePerson(Mono<Person> person) {
-        return person.map( p -> {
-            people.put(p.getName(), p);
-            return ResponseEntity.ok(p);
-        });
-    }
-
-    public Mono<List<String>> readRoles() {
-        return client.readRoles().collectList();
+    public List<String> readRoles() {
+        return client.readRoles();
     }
 }

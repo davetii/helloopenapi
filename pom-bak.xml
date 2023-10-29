@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -33,10 +33,15 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-	      <groupId>org.springdoc</groupId>
-	      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-	      <version>2.2.0</version>
-	   </dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.openapitools</groupId>
 			<artifactId>jackson-databind-nullable</artifactId>
@@ -86,6 +91,11 @@
 			<version>3.0.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-resolver-dns-native-macos</artifactId>
+			<version>4.1.97.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -122,6 +132,7 @@
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
 								<useSpringBoot3>true</useSpringBoot3>
+								<reactive>true</reactive>
 							</configOptions>
 						</configuration>
 					</execution>
@@ -140,7 +151,7 @@
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
-								<library>resttemplate</library>
+								<library>webclient</library>
 								<useSpringBoot3>true</useSpringBoot3>
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
