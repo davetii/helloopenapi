@@ -1,6 +1,7 @@
 package software.daveturner.helloopenapi.delegate;
 
 
+import com.google.gson.*;
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.server.*;
@@ -8,7 +9,6 @@ import reactor.core.publisher.*;
 import software.daveturner.helloopenapi.api.*;
 import software.daveturner.helloopenapi.client.api.*;
 import software.daveturner.helloopenapi.model.*;
-
 import java.util.*;
 
 @Service
@@ -18,12 +18,27 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
 
     private final DefaultApi client;
 
+    List<String> allowedRoles = new ArrayList<>();
+
     public V1ApiDelegateImpl() {
         people.put("Diana", newPerson("Diana", "spouse"));
         people.put("Mary", newPerson("Mary", "child"));
         people.put("David", newPerson("David", "child"));
         people.put("Wendie", newPerson("Wendie", "sibling"));
         client = new DefaultApi();
+        readRoles().collectList().subscribe(s -> {
+            Gson gson = new Gson();
+            /*
+           not exactly sure what im doing wrong
+           I should NOT have to do this.
+           probably the answer is this code is NOT a good approach for reactive code
+           something went wrong with how Spring interpreted the reponse of
+            [ "friend", "parent", "sibling", "spouse", "child", "relative" ]
+             */
+            List<String> converted = gson.fromJson(s.get(0), ArrayList.class);
+            allowedRoles.addAll(converted);
+                }
+        );
     }
 
     private Person newPerson(String n, String r) {
@@ -70,12 +85,19 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
 
     public Mono<ResponseEntity<Person>> createUpdatePerson(Mono<Person> person) {
         return person.map( p -> {
-            people.put(p.getName(), p);
-            return ResponseEntity.ok(p);
+            System.out.println(allowedRoles);
+            System.out.println(allowedRoles.size());
+            System.out.println(p.getRole());
+            System.out.println(allowedRoles.contains(p.getRole()));
+            if(allowedRoles.contains(p.getRole())) {
+                people.put(p.getName(), p);
+                return ResponseEntity.ok(p);
+            }
+           return ResponseEntity.badRequest().build();
         });
     }
 
-    public Mono<List<String>> readRoles() {
-        return client.readRoles().collectList();
+    public Flux<String> readRoles() {
+        return client.readRoles();
     }
 }

@@ -1,13 +1,26 @@
 package software.daveturner.helloopenapi.stepdef;
 
+import com.github.tomakehurst.wiremock.*;
+import com.github.tomakehurst.wiremock.client.*;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.mock.web.server.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.web.server.*;
 import reactor.core.publisher.*;
 import software.daveturner.helloopenapi.delegate.*;
 import software.daveturner.helloopenapi.model.*;
 
+@SpringBootTest
 public class StepDefsIntegrationTest {
 
+
+
+
+    private static final WireMockServer server= new WireMockServer(4010);
     private final V1ApiDelegateImpl d = new V1ApiDelegateImpl();
     private String greetingValue = null;
     private int allPeopleSize = 0;
@@ -35,6 +48,7 @@ public class StepDefsIntegrationTest {
 
     @When("newPerson is called with {string} and {string}")
     public void callNewPlayer(String name, String role) {
+
         Person p = new Person();
         p.setRole(role);
         p.setName(name);

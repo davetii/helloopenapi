@@ -14,7 +14,7 @@ public class CucumberTest {
 
     private static final WireMockServer server= new WireMockServer(4010);
 
-    @BeforeAll
+    //@BeforeAll
     public static void setup() {
         ResponseDefinitionBuilder mockResponse = new ResponseDefinitionBuilder();
         mockResponse.withStatus(200);
@@ -23,9 +23,10 @@ public class CucumberTest {
 
         server.start();
         server.stubFor(WireMock.get("/roles").willReturn(mockResponse));
+        System.out.println("was I executed");
     }
 
-    @AfterAll
+    //@AfterAll
     public static void cleanup() {
         server.stop();
     }
