@@ -12,7 +12,7 @@ Collection of samples creating SpringBoot services from openapi generator
 
 ### Whats in the POM
 (Examples of usage)
-* Springboot 3 reactive and mvc version (see older feature branches for mvc)
+* Springboot 3 mvc version (see react feature branches for reactvie version)
 * openapi
 * Cucumber
 * Wiremock
@@ -23,11 +23,9 @@ Collection of samples creating SpringBoot services from openapi generator
 ### Executing program
 * mvn spring-boot:run
 
-### Todo
-* use readroles calls in async way
-
-
 ### History
+* feature/feature/rollback-to-mvc
+  * Back to mvc based, improved config for docker  
 * feature/reactive
   * Converted api to spring-boot-reactive
 * feature/adding-docker
