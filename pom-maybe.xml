@@ -80,12 +80,6 @@
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.github.tomakehurst</groupId>
-			<artifactId>wiremock</artifactId>
-			<version>3.0.1</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -141,34 +135,15 @@
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
 								<library>resttemplate</library>
+								<annotationLibrary>none</annotationLibrary>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<useSpringBoot3>true</useSpringBoot3>
+								<requestMappingMode>none</requestMappingMode>
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<groupId>org.codehaus.mojo</groupId>
-				<executions>
-					<execution>
-						<id>Run Containers</id>
-						<phase>validate</phase>
-						<configuration>
-							<executable>docker-compose</executable>
-							<commandlineArgs>up --detach</commandlineArgs>
-						</configuration>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
